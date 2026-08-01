@@ -12,7 +12,7 @@ public class Main {
 
         for (Session s : sessions) {
 
-            System.out.println(s);
+            System.out.println(s.getId() + "(" + s.getDuration() + ")");
 
         }
 

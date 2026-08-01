@@ -3,25 +3,24 @@ package model;
 public class Placement {
 
     private final Session session;
-    private final int day;
-    private final int period;
+    private final TimeSlot timeSlot;
 
-    public Placement(Session session, int day, int period) {
+    public Placement(Session session, TimeSlot timeSlot) {
 
         this.session = session;
-        this.day = day;
-        this.period = period;
+        this.timeSlot = timeSlot;
     }
 
     public Session getSession() {
         return session;
     }
 
-    public int getDay() {
-        return day;
+    public TimeSlot getTimeSlot() {
+        return timeSlot;
     }
 
-    public int getPeriod() {
-        return period;
+    @Override
+    public String toString() {
+        return session + " @ " + timeSlot;
     }
 }

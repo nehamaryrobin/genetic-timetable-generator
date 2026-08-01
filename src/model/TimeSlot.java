@@ -21,7 +21,7 @@ public class TimeSlot {
 
     @Override
     public String toString() {
-        return day + " P" + period;
+        return day + " P" + (period + 1);
     }
 
 }

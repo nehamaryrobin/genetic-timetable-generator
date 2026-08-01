@@ -42,4 +42,11 @@ public class Subject {
     public String toString() {
         return code;
     }
+
+    /*
+     * @Override
+     * public String toString() {
+     * return id + "(" + duration + ")"; // Uses 'id' instead of 'subject.getCode()'
+     * }
+     */
 }
