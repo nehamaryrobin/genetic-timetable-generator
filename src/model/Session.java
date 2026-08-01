@@ -2,13 +2,19 @@ package model;
 
 public class Session {
 
+    private final int id;
     private final Subject subject;
     private final int duration; // Number of consecutive slots required
 
-    public Session(Subject subject, int duration) {
+    public Session(int id, Subject subject, int duration) {
 
+        this.id = id;
         this.subject = subject;
         this.duration = duration;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Subject getSubject() {
