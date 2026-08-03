@@ -3,24 +3,27 @@ package model;
 public class Placement {
 
     private final Session session;
-    private final TimeSlot timeSlot;
+    private TimeSlot slot; // removed final - mutable
 
-    public Placement(Session session, TimeSlot timeSlot) {
-
+    public Placement(Session session, TimeSlot slot) {
         this.session = session;
-        this.timeSlot = timeSlot;
+        this.slot = slot; // timeSlot -> slot
     }
 
     public Session getSession() {
         return session;
     }
 
-    public TimeSlot getTimeSlot() {
-        return timeSlot;
+    public TimeSlot getSlot() {
+        return slot;
+    }
+
+    public void setSlot(TimeSlot slot) {
+        this.slot = slot;
     }
 
     @Override
     public String toString() {
-        return session + " @ " + timeSlot;
+        return session + " -> " + slot;
     }
 }

@@ -4,29 +4,59 @@ import model.*;
 
 public class TimetablePrinter {
 
-    public static void print(Timetable timetable) {
+    public static void print(
+            Timetable timetable) {
 
-        System.out.println();
+        String[][] grid = new String[5][6];
 
-        for (int day = 0; day < Timetable.DAYS; day++) {
+        for (Placement p : timetable.getPlacements()) {
 
-            System.out.println(Day.values()[day]);
+            int day = p.getSlot()
+                    .getDay()
+                    .ordinal();
 
-            for (int period = 0; period < Timetable.PERIODS; period++) {
+            int start = p.getSlot()
+                    .getPeriod();
 
-                Placement placement = timetable.get(day, period);
+            int duration = p.getSession()
+                    .getDuration();
 
-                if (placement == null) {
+            for (int i = 0; i < duration; i++) {
 
-                    System.out.printf("P%d : FREE%n", period + 1);
-
-                } else {
-
-                    System.out.printf("P%d : %s%n", period + 1, placement.getSession().getSubject().getCode());
-                }
+                grid[day][start + i] = p.getSession()
+                        .getSubject()
+                        .getCode();
 
             }
-            System.out.println();
+
         }
+
+        for (int d = 0; d < 5; d++) {
+
+            System.out.println(
+                    Day.values()[d]);
+
+            for (int p = 0; p < 6; p++) {
+
+                if (grid[d][p] == null)
+
+                    System.out.printf(
+                            "P%d : FREE%n",
+                            p + 1);
+
+                else
+
+                    System.out.printf(
+                            "P%d : %s%n",
+                            p + 1,
+                            grid[d][p]);
+
+            }
+
+            System.out.println();
+
+        }
+
     }
+
 }

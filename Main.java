@@ -1,9 +1,8 @@
+import generator.RandomTimetableGenerator;
 import model.*;
 import util.TimetablePrinter;
 
 import java.util.List;
-
-import generator.RandomTimetableGenerator;
 
 public class Main {
 
@@ -20,4 +19,5 @@ public class Main {
         TimetablePrinter.print(timetable);
 
     }
+
 }

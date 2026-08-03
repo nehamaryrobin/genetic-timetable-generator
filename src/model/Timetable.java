@@ -1,33 +1,23 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+//new : Placement[][] -> List<Placement>
 public class Timetable {
 
-    // cahnge : session class -> placement class
-    public static final int DAYS = 5;
-    public static final int PERIODS = 6;
-
-    private final Placement[][] slots;
+    private final List<Placement> placements;
 
     public Timetable() {
-        slots = new Placement[DAYS][PERIODS];
+        placements = new ArrayList<>();
     }
 
-    public boolean isEmpty(int day, int period) {
-        return slots[day][period] == null;
+    public void addPlacement(Placement placement) {
+        placements.add(placement);
     }
 
-    public Placement get(int day, int period) {
-        return slots[day][period];
-    }
-
-    public void assign(int day, int period, Session session) {
-        Placement placement = new Placement(session, new TimeSlot(Day.values()[day], period)); // new
-
-        slots[day][period] = placement;
-    }
-
-    public Placement[][] getSlots() {
-        return slots;
+    public List<Placement> getPlacements() {
+        return placements;
     }
 
 }
