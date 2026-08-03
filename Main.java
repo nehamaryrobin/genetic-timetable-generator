@@ -1,6 +1,9 @@
 import model.*;
+import util.TimetablePrinter;
 
 import java.util.List;
+
+import generator.RandomTimetableGenerator;
 
 public class Main {
 
@@ -10,12 +13,11 @@ public class Main {
 
         List<Session> sessions = SessionFactory.createSessions(subjects);
 
-        for (Session s : sessions) {
+        RandomTimetableGenerator generator = new RandomTimetableGenerator();
 
-            System.out.println(s.getId() + "(" + s.getDuration() + ")");
+        Timetable timetable = generator.generate(sessions);
 
-        }
+        TimetablePrinter.print(timetable);
 
     }
-
 }

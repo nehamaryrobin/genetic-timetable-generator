@@ -2,27 +2,31 @@ package model;
 
 public class Timetable {
 
+    // cahnge : session class -> placement class
     public static final int DAYS = 5;
     public static final int PERIODS = 6;
 
-    private final Subject[][] slots;
+    private final Placement[][] slots;
 
     public Timetable() {
-
-        slots = new Subject[DAYS][PERIODS];
+        slots = new Placement[DAYS][PERIODS];
     }
 
-    public void assign(int day, int period, Subject subject) {
-
-        slots[day][period] = subject;
+    public boolean isEmpty(int day, int period) {
+        return slots[day][period] == null;
     }
 
-    public Subject get(int day, int period) {
-
+    public Placement get(int day, int period) {
         return slots[day][period];
     }
 
-    public Subject[][] getSlots() {
+    public void assign(int day, int period, Session session) {
+        Placement placement = new Placement(session, new TimeSlot(Day.values()[day], period)); // new
+
+        slots[day][period] = placement;
+    }
+
+    public Placement[][] getSlots() {
         return slots;
     }
 
