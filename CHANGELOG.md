@@ -2,6 +2,11 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 7. "Created Chromosome, Population, and PopulationGenerator"
+- Added ga Package: Created Chromosome, Population, and PopulationGenerator classes for Genetic Algorithm initialization.
+- Updated RandomTimetableGenerator: Refactored the generator to build and return Chromosome objects directly (addGene()) instead of Timetable.
+- Refactored Chromosome: Renamed internal field genes to placements while keeping addGene() and getGenes() interface.
+
 ## 6. proper scheduling engine
 Subjects
       │
@@ -19,6 +24,14 @@ Timetable (List<Placement>)
       │
       ▼
 Printer (5×6 Grid)
+
+### Added
+- Implemented core placement algorithms (`separateSessions`, `placeLabs`, `placeLectures`) in `RandomTimetableGenerator`.
+- Added collision detection logic (`canPlaceLab` & `occupied`) to prevent overlapping slots.
+### Changed
+- **`Timetable`**: Refactored internal representation from a fixed 2D array (`Placement[][]`) to a dynamic `List<Placement>`.
+- **`Placement`**: Updated `slot` field to be mutable with `getSlot()` and `setSlot()`.
+- **`TimetablePrinter`**: Reconstructed 5×6 grid printing to render from `List<Placement>`.
 
 ## 5 "generated a random timetable, separated lecture/lab"
 -  Created `RandomTimetableGenerator` scaffolding for initial placement logic.

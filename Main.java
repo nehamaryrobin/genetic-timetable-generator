@@ -4,6 +4,9 @@ import util.TimetablePrinter;
 
 import java.util.List;
 
+import ga.Population;
+import ga.PopulationGenerator;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -12,11 +15,13 @@ public class Main {
 
         List<Session> sessions = SessionFactory.createSessions(subjects);
 
-        RandomTimetableGenerator generator = new RandomTimetableGenerator();
+        PopulationGenerator generator = new PopulationGenerator();
 
-        Timetable timetable = generator.generate(sessions);
+        Population population = generator.generate(10, sessions);
 
-        TimetablePrinter.print(timetable);
+        System.out.println(
+                "Population Size : "
+                        + population.size());
 
     }
 
