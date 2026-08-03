@@ -17,11 +17,11 @@ public class Chromosome {
         fitness = Integer.MAX_VALUE;
     }
 
-    public void addGene(Placement placement) {
+    public void addPlacements(Placement placement) {
         placements.add(placement);
     }
 
-    public List<Placement> getGenes() {
+    public List<Placement> getPlacements() {
         return placements;
     }
 

@@ -1,5 +1,6 @@
 package generator;
 
+import config.SchedulingConfig;
 import model.*;
 
 import java.util.ArrayList;
@@ -40,14 +41,14 @@ public class RandomTimetableGenerator {
         for (Session lab : labs) {
             boolean placed = false;
             while (!placed) {
-                int day = random.nextInt(5);
-                int period = random.nextInt(6 - lab.getDuration() + 1);
+                int day = random.nextInt(SchedulingConfig.WORKING_DAYS);
+                int period = random.nextInt(SchedulingConfig.PERIODS_PER_DAY - lab.getDuration() + 1);
 
                 if (canPlaceLab(chromosome, Day.values()[day], period, lab.getDuration())) {
                     Placement placement = new Placement(
                             lab,
                             new TimeSlot(Day.values()[day], period));
-                    chromosome.addGene(placement);
+                    chromosome.addPlacements(placement);
                     placed = true;
                 }
             }
@@ -64,7 +65,7 @@ public class RandomTimetableGenerator {
     }
 
     private boolean occupied(Chromosome chromosome, Day day, int period) {
-        for (Placement p : chromosome.getGenes()) {
+        for (Placement p : chromosome.getPlacements()) {
             if (p.getSlot().getDay() == day) {
                 int start = p.getSlot().getPeriod();
                 int end = start + p.getSession().getDuration() - 1;
@@ -83,14 +84,14 @@ public class RandomTimetableGenerator {
         for (Session lecture : lectures) {
             boolean placed = false;
             while (!placed) {
-                int day = random.nextInt(5);
-                int period = random.nextInt(6);
+                int day = random.nextInt(SchedulingConfig.WORKING_DAYS);
+                int period = random.nextInt(SchedulingConfig.PERIODS_PER_DAY);
 
                 if (!occupied(chromosome, Day.values()[day], period)) {
                     Placement placement = new Placement(
                             lecture,
                             new TimeSlot(Day.values()[day], period));
-                    chromosome.addGene(placement);
+                    chromosome.addPlacements(placement);
                     placed = true;
                 }
             }
