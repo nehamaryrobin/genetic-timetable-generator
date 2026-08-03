@@ -2,6 +2,26 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 9. "Tournament Selection"
+## Added
+- TournamentSelection.java: Implemented tournament selection algorithm to sample candidate chromosomes and select the best candidate (lowest penalty score).
+
+## Changed
+Main.java Execution Pipeline:
+- Added FitnessEvaluator loop to calculate penalties for every chromosome in the population.
+- Added console output listing individual fitness scores for all 10 generated chromosomes.
+Integrated TournamentSelection(3) and printed the selected parent's fitness score.
+
+
+## 8. Configuration Centralization, GA Setup & Fitness Evaluator
+### Added
+- **`SchedulingConfig`**: Centralized `WORKING_DAYS` (5) and `PERIODS_PER_DAY` (6) constants.
+- **`ga` Package**: Created `Chromosome`, `Population`, `PopulationGenerator`, and initial `FitnessEvaluator` (consecutive lecture penalty).
+- **`TimetableGridBuilder`**: Utility to project a `Chromosome` into a 2D `Placement[][]` matrix.
+### Changed
+- **Config Refactoring**: Replaced all magic numbers (`5` and `6`) across `RandomTimetableGenerator`, `TimetablePrinter`, `TimetableGridBuilder`, and `FitnessEvaluator` with `SchedulingConfig` constants.
+- **Generator**: `RandomTimetableGenerator` now constructs and returns `Chromosome` objects directly.
+
 ## 7. "Created Chromosome, Population, and PopulationGenerator"
 - Added ga Package: Created Chromosome, Population, and PopulationGenerator classes for Genetic Algorithm initialization.
 - Updated RandomTimetableGenerator: Refactored the generator to build and return Chromosome objects directly (addGene()) instead of Timetable.
