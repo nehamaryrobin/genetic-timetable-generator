@@ -2,6 +2,9 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 11 "add OnePointCrossover & repair operator"
+- Add OnePointCrossover class to combine parent chromosome placements
+- Add RepairOperator class to resolve placement overlaps and relocate invalid slots
 
 ## 10 "add deep copy constructors for Placement and Chromosome"
 
