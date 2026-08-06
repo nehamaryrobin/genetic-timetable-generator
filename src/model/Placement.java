@@ -10,6 +10,18 @@ public class Placement {
         this.slot = slot; // timeSlot -> slot
     }
 
+    public Placement(Placement other) {
+        this.session = other.session;
+        this.slot = new TimeSlot(
+                other.slot.getDay(),
+                other.slot.getPeriod()
+        );
+    }
+
+    public Placement copy() {
+        return new Placement(this);
+    }
+
     public Session getSession() {
         return session;
     }

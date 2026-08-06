@@ -17,6 +17,18 @@ public class Chromosome {
         fitness = Integer.MAX_VALUE;
     }
 
+    public Chromosome(Chromosome other) {
+        this.placements = new ArrayList<>();
+        for (Placement placement : other.placements) {
+            this.placements.add(new Placement(placement));
+        }
+        this.fitness = other.fitness;
+    }
+
+    public Chromosome copy() {
+        return new Chromosome(this);
+    }
+
     public void addPlacements(Placement placement) {
         placements.add(placement);
     }

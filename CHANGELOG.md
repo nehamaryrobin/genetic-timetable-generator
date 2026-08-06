@@ -2,6 +2,14 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+
+## 10 "add deep copy constructors for Placement and Chromosome"
+
+- Implement copy constructor and copy() method for Placement
+- Implement deep copy constructor and copy() method for Chromosome
+- Add deep copy verification test and section comments in Main
+- Add initial OnePointCrossover class setup
+
 ## 9. "Tournament Selection"
 ## Added
 - TournamentSelection.java: Implemented tournament selection algorithm to sample candidate chromosomes and select the best candidate (lowest penalty score).
