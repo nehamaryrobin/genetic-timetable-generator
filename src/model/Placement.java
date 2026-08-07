@@ -14,8 +14,7 @@ public class Placement {
         this.session = other.session;
         this.slot = new TimeSlot(
                 other.slot.getDay(),
-                other.slot.getPeriod()
-        );
+                other.slot.getPeriod());
     }
 
     public Placement copy() {
@@ -32,6 +31,12 @@ public class Placement {
 
     public void setSlot(TimeSlot slot) {
         this.slot = slot;
+    }
+
+    public void swapSlot(Placement other) {
+        TimeSlot temp = this.slot;
+        this.slot = other.slot;
+        other.slot = temp;
     }
 
     @Override

@@ -1,10 +1,15 @@
 # Changelog
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
+## 12 " add SwapMutation operator and enhance TimetablePrinter"
+ Add swapSlot method to Placement model
+- Implement SwapMutation class for genetic algorithm mutation step
+- Update TimetablePrinter to accept Chromosome and display Subject Name
+- Update Main to test and display timetable mutation
 
 ## 11 "add OnePointCrossover & repair operator"
 - Add OnePointCrossover class to combine parent chromosome placements
-- Add RepairOperator class to resolve placement overlaps and relocate invalid slots
+- Add RepairOperator class to resolve placement overlaps and relocate invalid slots. FLAW : O(n²)
 
 ## 10 "add deep copy constructors for Placement and Chromosome"
 

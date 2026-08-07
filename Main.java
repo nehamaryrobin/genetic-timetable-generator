@@ -1,4 +1,5 @@
 import model.*;
+import util.TimetablePrinter;
 import ga.*;
 
 import java.util.List;
@@ -49,6 +50,14 @@ public class Main {
 
         System.out.println("Original after mutation  : " + original.getPlacements().get(0).getSlot());
         System.out.println("Copy after mutation      : " + copy.getPlacements().get(0).getSlot());
+
+        SwapMutation mutation = new SwapMutation(1.0);
+        Chromosome chromosome = population.getChromosomes().get(0);
+
+        TimetablePrinter.print(chromosome);
+        mutation.mutate(chromosome);
+        System.out.println();
+        TimetablePrinter.print(chromosome);
     }
 
 }
