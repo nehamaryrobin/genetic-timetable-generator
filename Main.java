@@ -23,6 +23,7 @@ public class Main {
         }
 
         // Displaying Results
+        System.out.println("=== INITIAL POPULATION & FITNESS ===");
         System.out.println("Population Size : " + population.size());
         System.out.println();
 
@@ -31,15 +32,15 @@ public class Main {
         for (Chromosome c : population.getChromosomes()) {
             System.out.printf("Chromosome %2d Fitness : %d%n", index++, c.getFitness());
         }
-        System.out.println();
 
         // Tournament Selection
+        System.out.println("\n=== TOURNAMENT SELECTION ===");
         TournamentSelection selection = new TournamentSelection(3);
         Chromosome parent = selection.select(population);
-        System.out.println("Selected Fitness   : " + parent.getFitness());
+        System.out.println("Selected Best Parent Fitness : " + parent.getFitness());
 
         // Deep Copy verification
-        System.out.println("\n--- Deep Copy Verification ---");
+        System.out.println("\n=== DEEP COPY VERIFICATION ===");
         Chromosome original = population.getChromosomes().get(0);
         Chromosome copy = original.copy();
 
@@ -51,13 +52,27 @@ public class Main {
         System.out.println("Original after mutation  : " + original.getPlacements().get(0).getSlot());
         System.out.println("Copy after mutation      : " + copy.getPlacements().get(0).getSlot());
 
-        SwapMutation mutation = new SwapMutation(1.0);
+        // Swap Mutation Test
+        System.out.println("\n=== SWAP MUTATION TEST ===");
+        SwapMutation mutation = new SwapMutation(1.0); // 1.0 only for testing, usually < 0.1
         Chromosome chromosome = population.getChromosomes().get(0);
 
+        System.out.println("--- Timetable BEFORE Swap Mutation ---");
         TimetablePrinter.print(chromosome);
+
         mutation.mutate(chromosome);
-        System.out.println();
+
+        System.out.println("--- Timetable AFTER Swap Mutation ---");
         TimetablePrinter.print(chromosome);
+
+        // Genetic Algorithm Execution
+        System.out.println("\n=== RUNNING GENETIC ALGORITHM (100 Chromosomes, 200 Generations) ===");
+        GeneticAlgorithm ga = new GeneticAlgorithm();
+        Chromosome best = ga.run(100, 200, sessions);
+
+        System.out.println("\n=== FINAL OPTIMIZED TIMETABLE ===");
+        System.out.println("Best Solution Fitness Score (Penalties) : " + best.getFitness());
+        TimetablePrinter.print(best);
     }
 
 }

@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
+
+## 13 "implement GeneticAlgorithm loop and add bounds checking to SwapMutation"
+
+- Create GeneticAlgorithm class orchestrating selection, crossover, repair, mutation, and evaluation
+- Add legal slot bounds checking to SwapMutation to prevent grid index overflow
+- Add GA execution call and formatted section headers to Main
+
 ## 12 " add SwapMutation operator and enhance TimetablePrinter"
  Add swapSlot method to Placement model
 - Implement SwapMutation class for genetic algorithm mutation step
