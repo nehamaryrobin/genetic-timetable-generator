@@ -6,12 +6,27 @@ import java.util.List;
 
 public class GeneticAlgorithm {
 
-    private final PopulationGenerator populationGenerator = new PopulationGenerator();
-    private final FitnessEvaluator evaluator = new FitnessEvaluator();
-    private final TournamentSelection selection = new TournamentSelection(3);
-    private final OnePointCrossover crossover = new OnePointCrossover();
-    private final SwapMutation mutation = new SwapMutation(0.05);
-    private final RepairOperator repair = new RepairOperator();
+    private final PopulationGenerator populationGenerator;
+    private final FitnessEvaluator evaluator;
+    private final TournamentSelection selection;
+    private final OnePointCrossover crossover;
+    private final SwapMutation mutation;
+    private final RepairOperator repair;
+
+    public GeneticAlgorithm(
+            PopulationGenerator populationGenerator,
+            FitnessEvaluator evaluator,
+            TournamentSelection selection,
+            OnePointCrossover crossover,
+            SwapMutation mutation,
+            RepairOperator repair) {
+        this.populationGenerator = populationGenerator;
+        this.evaluator = evaluator;
+        this.selection = selection;
+        this.crossover = crossover;
+        this.mutation = mutation;
+        this.repair = repair;
+    }
 
     public Chromosome run(int populationSize, int generations, List<Session> sessions) {
 

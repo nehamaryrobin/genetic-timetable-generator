@@ -2,6 +2,10 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 14 "Dependency injection for Genetic Algorithm"
+- add dependency injection for GeneticAlgorithm class
+- Refactor Main to instantiate and inject dependencies into GeneticAlgorithm
+
 ## 13 "implement GeneticAlgorithm loop and add bounds checking to SwapMutation"
 
 - Create GeneticAlgorithm class orchestrating selection, crossover, repair, mutation, and evaluation

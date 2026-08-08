@@ -67,7 +67,15 @@ public class Main {
 
         // Genetic Algorithm Execution
         System.out.println("\n=== RUNNING GENETIC ALGORITHM (100 Chromosomes, 200 Generations) ===");
-        GeneticAlgorithm ga = new GeneticAlgorithm();
+
+        // dependency injection
+        GeneticAlgorithm ga = new GeneticAlgorithm(
+                new PopulationGenerator(),
+                new FitnessEvaluator(),
+                new TournamentSelection(3),
+                new OnePointCrossover(),
+                new SwapMutation(0.05),
+                new RepairOperator());
         Chromosome best = ga.run(100, 200, sessions);
 
         System.out.println("\n=== FINAL OPTIMIZED TIMETABLE ===");
