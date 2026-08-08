@@ -2,34 +2,39 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
-## 14 "Dependency injection for Genetic Algorithm"
+## 14 "REFACTOR : Constraint Interface"
+- created Constraint interface for all constraints
+
+------------- Iteration 1 Completed -----------------
+
+## 13 "Dependency injection for Genetic Algorithm"
 - add dependency injection for GeneticAlgorithm class
 - Refactor Main to instantiate and inject dependencies into GeneticAlgorithm
 
-## 13 "implement GeneticAlgorithm loop and add bounds checking to SwapMutation"
+## 12 "implement GeneticAlgorithm loop and add bounds checking to SwapMutation"
 
 - Create GeneticAlgorithm class orchestrating selection, crossover, repair, mutation, and evaluation
 - Add legal slot bounds checking to SwapMutation to prevent grid index overflow
 - Add GA execution call and formatted section headers to Main
 
-## 12 " add SwapMutation operator and enhance TimetablePrinter"
+## 11 " add SwapMutation operator and enhance TimetablePrinter"
  Add swapSlot method to Placement model
 - Implement SwapMutation class for genetic algorithm mutation step
 - Update TimetablePrinter to accept Chromosome and display Subject Name
 - Update Main to test and display timetable mutation
 
-## 11 "add OnePointCrossover & repair operator"
+## 10 "add OnePointCrossover & repair operator"
 - Add OnePointCrossover class to combine parent chromosome placements
 - Add RepairOperator class to resolve placement overlaps and relocate invalid slots. FLAW : O(n²)
 
-## 10 "add deep copy constructors for Placement and Chromosome"
+## 9 "add deep copy constructors for Placement and Chromosome"
 
 - Implement copy constructor and copy() method for Placement
 - Implement deep copy constructor and copy() method for Chromosome
 - Add deep copy verification test and section comments in Main
 - Add initial OnePointCrossover class setup
 
-## 9. "Tournament Selection"
+## 8. "Tournament Selection"
 ## Added
 - TournamentSelection.java: Implemented tournament selection algorithm to sample candidate chromosomes and select the best candidate (lowest penalty score).
 
@@ -40,7 +45,7 @@ Main.java Execution Pipeline:
 Integrated TournamentSelection(3) and printed the selected parent's fitness score.
 
 
-## 8. Configuration Centralization, GA Setup & Fitness Evaluator
+## 7. Configuration Centralization, GA Setup & Fitness Evaluator
 ### Added
 - **`SchedulingConfig`**: Centralized `WORKING_DAYS` (5) and `PERIODS_PER_DAY` (6) constants.
 - **`ga` Package**: Created `Chromosome`, `Population`, `PopulationGenerator`, and initial `FitnessEvaluator` (consecutive lecture penalty).
@@ -49,12 +54,12 @@ Integrated TournamentSelection(3) and printed the selected parent's fitness scor
 - **Config Refactoring**: Replaced all magic numbers (`5` and `6`) across `RandomTimetableGenerator`, `TimetablePrinter`, `TimetableGridBuilder`, and `FitnessEvaluator` with `SchedulingConfig` constants.
 - **Generator**: `RandomTimetableGenerator` now constructs and returns `Chromosome` objects directly.
 
-## 7. "Created Chromosome, Population, and PopulationGenerator"
+## 6. "Created Chromosome, Population, and PopulationGenerator"
 - Added ga Package: Created Chromosome, Population, and PopulationGenerator classes for Genetic Algorithm initialization.
 - Updated RandomTimetableGenerator: Refactored the generator to build and return Chromosome objects directly (addGene()) instead of Timetable.
 - Refactored Chromosome: Renamed internal field genes to placements while keeping addGene() and getGenes() interface.
 
-## 6. proper scheduling engine
+## 5. proper scheduling engine
 Subjects
       │
       ▼
@@ -80,7 +85,7 @@ Printer (5×6 Grid)
 - **`Placement`**: Updated `slot` field to be mutable with `getSlot()` and `setSlot()`.
 - **`TimetablePrinter`**: Reconstructed 5×6 grid printing to render from `List<Placement>`.
 
-## 5 "generated a random timetable, separated lecture/lab"
+## 4 "generated a random timetable, separated lecture/lab"
 -  Created `RandomTimetableGenerator` scaffolding for initial placement logic.
 - Added custom session ID generation (e.g., `JAVA-1`, `DSA-1`) in `SessionFactory`.
 - Refactored `Session` ID type from `int` to `String`.
@@ -89,16 +94,15 @@ Printer (5×6 Grid)
 - DISADV - Placement[][] is a view of the timetable.
 
 
-## 4 "Refactor Session IDs to string format and add Placement TimeSlot integration"
+## 3 "Refactor Session IDs to string format and add Placement TimeSlot integration"
 - Placement & TimeSlot:
 Refactored Placement to use a TimeSlot object instead of separate day and period integers.
 Updated TimeSlot.toString() to display 1-indexed periods 
 
-### 3 Added
+### 2 Added
 - Created `RandomTimetableGenerator` scaffolding for initial placement logic.
 - Added custom session ID generation (e.g., `JAVA-1`, `DSA-1`) in `SessionFactory`.
 
-### 2 Changed
 - Refactored `Session` ID type from `int` to `String`.
 - Updated `Placement` model to utilize `TimeSlot` directly instead of raw `day` and `period` integers.
 - Updated `TimeSlot` formatting to output 1-indexed periods (`P1` to `P6`).
