@@ -2,6 +2,13 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 15  "add MaxDailyLectureConstraint and optimize constraint grid evaluation"
+- Refactor Constraint interface to accept pre-built Placement[][] grid
+- Build grid matrix once per evaluation in FitnessEvaluator to avoid redundant O(N) calls
+- Implement MaxDailyLectureConstraint using Map<Subject, Integer> daily frequency counting
+- Add equals() and hashCode() to Subject for safe HashMap key operations
+
+
 ## 14 "REFACTOR : Constraint Interface"
 - created Constraint interface for all constraints
 

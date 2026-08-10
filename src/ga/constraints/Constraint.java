@@ -1,9 +1,9 @@
 package ga.constraints;
 
-import ga.Chromosome;
+import ga.EvaluationContext;
+
+// Constraint doesn't care how the index was built.
 
 public interface Constraint {
-
-    int evaluate(Chromosome chromosome);
-
+    int evaluate(EvaluationContext context);
 }

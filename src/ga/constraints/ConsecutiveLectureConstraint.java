@@ -1,20 +1,20 @@
 package ga.constraints;
 
-import ga.Chromosome;
+import config.SchedulingConfig;
+
+import ga.EvaluationContext;
 import model.Placement;
-import util.TimetableGridBuilder;
 
 public class ConsecutiveLectureConstraint implements Constraint {
 
     @Override
-    public int evaluate(Chromosome chromosome) {
+    public int evaluate(EvaluationContext context) {
 
         int penalty = 0;
+        Placement[][] grid = context.getGrid();
 
-        Placement[][] grid = TimetableGridBuilder.build(chromosome);
-
-        for (int day = 0; day < 5; day++) {
-            for (int period = 0; period < 5; period++) {
+        for (int day = 0; day < SchedulingConfig.WORKING_DAYS; day++) {
+            for (int period = 0; period < SchedulingConfig.PERIODS_PER_DAY - 1; period++) {
 
                 Placement current = grid[day][period];
                 Placement next = grid[day][period + 1];

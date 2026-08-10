@@ -1,10 +1,10 @@
 package ga;
 
-import ga.constraints.Constraint;
-import ga.constraints.ConsecutiveLectureConstraint;
-
+import ga.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
+
+// FitnessEvaluator doesn't care how a constraint works.
 
 public class FitnessEvaluator {
 
@@ -12,14 +12,18 @@ public class FitnessEvaluator {
 
     public FitnessEvaluator() {
         constraints.add(new ConsecutiveLectureConstraint());
+        constraints.add(new MaxDailyLectureConstraint());
+        constraints.add(new SpreadConstraint());
     }
 
     public int evaluate(Chromosome chromosome) {
-        int penalty = 0;
-        for (Constraint constraint : constraints) {
-            penalty += constraint.evaluate(chromosome);
-        }
 
+        EvaluationContext context = new EvaluationContext(chromosome);
+        int penalty = 0;
+
+        for (Constraint constraint : constraints) {
+            penalty += constraint.evaluate(context);
+        }
         chromosome.setFitness(penalty);
         return penalty;
     }

@@ -39,14 +39,22 @@ public class Subject {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (this == other)
+            return true;
+        if (other == null || getClass() != other.getClass())
+            return false;
+        Subject subject = (Subject) other;
+        return java.util.Objects.equals(code, subject.code);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(code);
+    }
+
+    @Override
     public String toString() {
         return code;
     }
-
-    /*
-     * @Override
-     * public String toString() {
-     * return id + "(" + duration + ")"; // Uses 'id' instead of 'subject.getCode()'
-     * }
-     */
 }
