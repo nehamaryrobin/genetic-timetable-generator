@@ -52,6 +52,12 @@ public class GeneticAlgorithm {
 
             }
             population = nextGeneration;
+
+            Chromosome best = getBest(population);
+            double average = getAverageFitness(population);
+
+            System.out.println("Generation " + generation + " | Best: " + best.getFitness() + " | Average: "
+                    + String.format("%.2f", average));
         }
         return getBest(population);
     }
@@ -75,4 +81,13 @@ public class GeneticAlgorithm {
         }
         return best;
     }
+
+    private double getAverageFitness(Population population) {
+        long sum = 0;
+        for (Chromosome c : population.getChromosomes()) {
+            sum += c.getFitness();
+        }
+        return (double) sum / population.size();
+    }
+
 }

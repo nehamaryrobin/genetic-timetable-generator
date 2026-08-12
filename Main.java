@@ -66,7 +66,7 @@ public class Main {
         TimetablePrinter.print(chromosome);
 
         // Genetic Algorithm Execution
-        System.out.println("\n=== RUNNING GENETIC ALGORITHM (100 Chromosomes, 200 Generations) ===");
+        System.out.println("\n=== RUNNING GENETIC ALGORITHM (100 Chromosomes, 100 Generations) ===");
 
         // dependency injection
         GeneticAlgorithm ga = new GeneticAlgorithm(
@@ -76,7 +76,7 @@ public class Main {
                 new OnePointCrossover(),
                 new SwapMutation(0.05),
                 new RepairOperator());
-        Chromosome best = ga.run(100, 200, sessions);
+        Chromosome best = ga.run(100, 100, sessions);
 
         System.out.println("\n=== FINAL OPTIMIZED TIMETABLE ===");
         System.out.println("Best Solution Fitness Score (Penalties) : " + best.getFitness());

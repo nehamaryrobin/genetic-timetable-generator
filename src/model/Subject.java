@@ -7,11 +7,7 @@ public class Subject {
     private final int credits;
     private final SubjectType type;
 
-    public Subject(String code,
-            String name,
-            int credits,
-            SubjectType type) {
-
+    public Subject(String code, String name, int credits, SubjectType type) {
         this.code = code;
         this.name = name;
         this.credits = credits;
@@ -46,6 +42,8 @@ public class Subject {
             return false;
         Subject subject = (Subject) other;
         return java.util.Objects.equals(code, subject.code);
+        // use Objects.equals(a, b) instead of code.equals(subject.code)
+        // to avoid NullPointerException
     }
 
     @Override

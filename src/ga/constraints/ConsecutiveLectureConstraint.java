@@ -22,7 +22,8 @@ public class ConsecutiveLectureConstraint implements Constraint {
                 if (current == null || next == null)
                     continue;
 
-                if (current.getSession().getSubject().equals(next.getSession().getSubject())) {
+                if (!current.getSession().getSubject().isLab() && 
+                    current.getSession().getSubject().equals(next.getSession().getSubject())) {
                     penalty += 10;
                 }
             }

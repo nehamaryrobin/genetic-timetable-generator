@@ -2,6 +2,19 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 17 "resolve lab penalty bug and add population average fitness tracking"
+- Skip lab sessions in ConsecutiveLectureConstraint to allow zero-penalty convergence
+- Add average fitness logging per generation in GeneticAlgorithm
+- Mark legacy Timetable class as @Deprecated
+- Optimize constraint evaluators using PlacementIndex
+
+## 16 "introduce EvaluationContext and PlacementIndex for constraints"
+- Add EvaluationContext wrapper to encapsulate Chromosome, grid, and PlacementIndex
+- Add PlacementIndex helper for O(1) subject and day placement lookups
+- Update Constraint interface signature to accept EvaluationContext
+- Implement SpreadConstraint and MaxDailyLectureConstraint
+- Add equals() and hashCode() to Subject for Map/Set compatibility
+
 ## 15  "add MaxDailyLectureConstraint and optimize constraint grid evaluation"
 - Refactor Constraint interface to accept pre-built Placement[][] grid
 - Build grid matrix once per evaluation in FitnessEvaluator to avoid redundant O(N) calls

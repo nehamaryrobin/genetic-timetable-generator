@@ -17,6 +17,7 @@ public class Chromosome {
         fitness = Integer.MAX_VALUE;
     }
 
+    // COPY CONSTRUCTOR
     public Chromosome(Chromosome other) {
         this.placements = new ArrayList<>();
         for (Placement placement : other.placements) {

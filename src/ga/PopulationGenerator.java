@@ -9,8 +9,7 @@ public class PopulationGenerator {
 
     private final RandomTimetableGenerator generator = new RandomTimetableGenerator();
 
-    public Population generate(int populationSize,
-            List<Session> sessions) {
+    public Population generate(int populationSize, List<Session> sessions) {
 
         Population population = new Population();
 
