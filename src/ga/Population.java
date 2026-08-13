@@ -19,6 +19,16 @@ public class Population {
         return chromosomes;
     }
 
+    public Chromosome getBest() {
+        Chromosome best = null;
+        for (Chromosome chromosome : chromosomes) {
+            if (best == null || chromosome.getFitness() < best.getFitness()) {
+                best = chromosome;
+            }
+        }
+        return best;
+    }
+
     public int size() {
         return chromosomes.size();
     }

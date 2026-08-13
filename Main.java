@@ -75,7 +75,8 @@ public class Main {
                 new TournamentSelection(3),
                 new OnePointCrossover(),
                 new SwapMutation(0.05),
-                new RepairOperator());
+                new RepairOperator(),
+                new Elitism(2));
         Chromosome best = ga.run(100, 100, sessions);
 
         System.out.println("\n=== FINAL OPTIMIZED TIMETABLE ===");

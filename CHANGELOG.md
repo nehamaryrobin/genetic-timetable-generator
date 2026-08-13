@@ -2,6 +2,10 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 18 "implement elitism in genetic algorithm"
+- Add Elitism class to preserve top N individuals across generations
+- Add getBest() helper method to Population
+
 ## 17 "resolve lab penalty bug and add population average fitness tracking"
 - Skip lab sessions in ConsecutiveLectureConstraint to allow zero-penalty convergence
 - Add average fitness logging per generation in GeneticAlgorithm

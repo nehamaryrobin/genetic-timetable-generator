@@ -12,6 +12,7 @@ public class GeneticAlgorithm {
     private final OnePointCrossover crossover;
     private final SwapMutation mutation;
     private final RepairOperator repair;
+    private final Elitism elitism;
 
     public GeneticAlgorithm(
             PopulationGenerator populationGenerator,
@@ -19,13 +20,15 @@ public class GeneticAlgorithm {
             TournamentSelection selection,
             OnePointCrossover crossover,
             SwapMutation mutation,
-            RepairOperator repair) {
+            RepairOperator repair,
+            Elitism elitism) {
         this.populationGenerator = populationGenerator;
         this.evaluator = evaluator;
         this.selection = selection;
         this.crossover = crossover;
         this.mutation = mutation;
         this.repair = repair;
+        this.elitism = elitism;
     }
 
     public Chromosome run(int populationSize, int generations, List<Session> sessions) {
@@ -37,6 +40,8 @@ public class GeneticAlgorithm {
         for (int generation = 0; generation < generations; generation++) {
 
             Population nextGeneration = new Population();
+
+            elitism.preserve(population, nextGeneration);
 
             while (nextGeneration.size() < populationSize) {
 
@@ -57,7 +62,7 @@ public class GeneticAlgorithm {
             double average = getAverageFitness(population);
 
             System.out.println("Generation " + generation + " | Best: " + best.getFitness() + " | Average: "
-                    + String.format("%.2f", average));
+                    + String.format("%.2f", average) + " | Elitism: " + elitism.getEliteCount());
         }
         return getBest(population);
     }
@@ -69,12 +74,10 @@ public class GeneticAlgorithm {
         }
     }
 
+    @Deprecated
     private Chromosome getBest(Population population) {
-
         Chromosome best = null;
-
         for (Chromosome chromosome : population.getChromosomes()) {
-
             if (best == null || chromosome.getFitness() < best.getFitness()) {
                 best = chromosome;
             }
