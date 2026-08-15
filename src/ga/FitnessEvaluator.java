@@ -14,6 +14,7 @@ public class FitnessEvaluator {
         constraints.add(new ConsecutiveLectureConstraint());
         constraints.add(new MaxDailyLectureConstraint());
         constraints.add(new SpreadConstraint());
+        constraints.add(new GapConstraint());
     }
 
     public int evaluate(Chromosome chromosome) {

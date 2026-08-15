@@ -34,13 +34,12 @@ public class GeneticAlgorithm {
     public Chromosome run(int populationSize, int generations, List<Session> sessions) {
 
         Population population = populationGenerator.generate(populationSize, sessions);
-
         evaluatePopulation(population);
+        Chromosome bestSoFar = population.getBest().copy();
 
         for (int generation = 0; generation < generations; generation++) {
 
             Population nextGeneration = new Population();
-
             elitism.preserve(population, nextGeneration);
 
             while (nextGeneration.size() < populationSize) {
@@ -53,18 +52,31 @@ public class GeneticAlgorithm {
                 mutation.mutate(child);
                 repair.repair(child);
                 evaluator.evaluate(child);
+
                 nextGeneration.addChromosome(child);
-
             }
-            population = nextGeneration;
 
-            Chromosome best = getBest(population);
+            population = nextGeneration;
+            Chromosome currentBest = population.getBest();
+
+            if (currentBest.getFitness() < bestSoFar.getFitness()) {
+                bestSoFar = currentBest.copy();
+            }
+
             double average = getAverageFitness(population);
 
-            System.out.println("Generation " + generation + " | Best: " + best.getFitness() + " | Average: "
-                    + String.format("%.2f", average) + " | Elitism: " + elitism.getEliteCount());
+            System.out.println(
+                    "Generation "
+                            + generation
+                            + " | Best: "
+                            + currentBest.getFitness()
+                            + " | Best So Far: "
+                            + bestSoFar.getFitness()
+                            + " | Average: "
+                            + String.format("%.2f", average));
         }
-        return getBest(population);
+
+        return bestSoFar;
     }
 
     private void evaluatePopulation(Population population) {
@@ -74,23 +86,13 @@ public class GeneticAlgorithm {
         }
     }
 
-    @Deprecated
-    private Chromosome getBest(Population population) {
-        Chromosome best = null;
-        for (Chromosome chromosome : population.getChromosomes()) {
-            if (best == null || chromosome.getFitness() < best.getFitness()) {
-                best = chromosome;
-            }
-        }
-        return best;
-    }
-
     private double getAverageFitness(Population population) {
-        long sum = 0;
-        for (Chromosome c : population.getChromosomes()) {
-            sum += c.getFitness();
+
+        int total = 0;
+        for (Chromosome chromosome : population.getChromosomes()) {
+            total += chromosome.getFitness();
         }
-        return (double) sum / population.size();
+        return (double) total / population.size();
     }
 
 }

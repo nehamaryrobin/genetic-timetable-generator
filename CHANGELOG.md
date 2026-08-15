@@ -2,6 +2,10 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 19 "Add Gap Constraint"
+- Added GapConstraint class to penalize gaps between lectures of the same subject.
+
+
 ## 18 "implement elitism in genetic algorithm"
 - Add Elitism class to preserve top N individuals across generations
 - Add getBest() helper method to Population
