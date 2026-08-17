@@ -6,63 +6,9 @@ All architectural decisions, constraints, evolutionary conditions, and conflict 
 
 ## 🚀 Iteration 2: Current System Architecture (Modular Constraints, Elitism & Indexing)
 
-### 1. 🏗️ High-Level System Architecture Diagram
-
-```mermaid
-graph TD
-    Main["Main Entry Point"] -->|Injects Dependencies| GA["GeneticAlgorithm Engine"]
-
-    subgraph Evolutionary Core Loop
-        GA --> PopGen["PopulationGenerator"]
-        GA --> TournSel["TournamentSelection (k=3)"]
-        GA --> Cross["OnePointCrossover"]
-        GA --> Repair["RepairOperator (Overlap Resolution)"]
-        GA --> Mut["SwapMutation (rate=0.05)"]
-        GA --> Elite["Elitism (Top N Preservation)"]
-        GA --> Eval["FitnessEvaluator"]
-    end
-
-    subgraph Decoupled Constraint Evaluation Strategy
-        Eval -->|Instantiates| Context["EvaluationContext"]
-        Context --> Grid["TimetableGridBuilder (5x6 Matrix)"]
-        Context --> Index["PlacementIndex (Subject & Day Maps)"]
-
-        Eval -->|Evaluates Strategy List| ConstraintInterface["Constraint Interface"]
-        ConstraintInterface --> C1["ConsecutiveLectureConstraint (+10 penalty)"]
-        ConstraintInterface --> C2["MaxDailyLectureConstraint (Max 2/day)"]
-        ConstraintInterface --> C3["SpreadConstraint (Spread across credit days)"]
-    end
-
-    subgraph Domain Models
-        Pop["Population"] --> Chrom["Chromosome"]
-        Chrom --> Place["Placement"]
-        Place --> Slot["TimeSlot (Day & Period)"]
-        Place --> Sess["Session (Subject & Duration)"]
-        Sess --> Subj["Subject (Credits & Lab Status)"]
-    end
-
-    subgraph Configuration
-        Cfg["SchedulingConfig (5 Working Days x 6 Periods)"]
-    end
-```
-
-### 2. ⚙️ Iteration 2 Key Architectural Enhancements
-
-#### **A. Preservative Elitism (`Elitism.java`)**
-* **Purpose**: Prevents destruction of optimal solutions during crossover and mutation.
-* **Mechanism**: Copies the top $N$ (default: `2`) fittest chromosomes (lowest penalty) from the parent population directly into the child generation before filling remaining slots with offspring.
-
-#### **B. Open/Closed Constraint System (`Constraint.java`)**
-* **Strategy Pattern**: `FitnessEvaluator` maintains a `List<Constraint>` and delegates evaluation to polymorphic constraint handlers.
-* **Extensibility**: New hard or soft constraints can be implemented independently without modifying the evaluation engine.
-* **Current Rules**:
-  * `ConsecutiveLectureConstraint`: Checks 2D grid for back-to-back non-lab duplicate subjects (`+10` penalty per occurrence).
-  * `MaxDailyLectureConstraint`: Limits non-lab lectures to a maximum per day (default `2`, `+10` penalty per excess lecture).
-  * `SpreadConstraint`: Requires non-lab subject lectures to span across distinct working days matching subject credit requirements (`+10` penalty per missing day).
-
-#### **C. High-Performance Evaluation Context (`EvaluationContext.java` & `PlacementIndex.java`)**
-* **Single-Pass Grid & Index Construction**: `EvaluationContext` encapsulates `Chromosome`, pre-built `Placement[5][6]` grid matrix, and `PlacementIndex`.
-* **$O(1)$ Hash Map Lookups**: `PlacementIndex` categorizes placements by `Subject` (`Map<Subject, List<Placement>>`) and `Day` (`EnumMap<Day, List<Placement>>`), eliminating redundant $O(N)$ array scans during constraint validation.
+- Decoupled Constraint Engine: Standardized Constraint interface, introduced EvaluationContext with $O(1)$ PlacementIndex lookups, and created WeightedConstraint to decouple raw violation counting from penalty weights.
+- New Soft Constraints: Implemented MaxDailyLectureConstraint, SpreadConstraint, and GapConstraint, while fixing double-period lab penalties in ConsecutiveLectureConstraint.
+- GA Enhancements: Added Elitism (preserving top chromosomes across generations) and generation average fitness tracking.
 
 ---
 ## 🚀 Iteration 1: Genetic Algorithm Engine Core ---------------------

@@ -2,6 +2,12 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 21 "REFACTOR : split Subject type to SessionType and CourseType , Credit split"
+- split Subject type to SessionType and CourseType , Credit split
+- Modified TimetablePrinter to print SessionType suffix with subject names
+
+------------- Iteration 2 Completed -----------------
+
 ## 20 "REFACTOR : Decouple constraint violation detection from weight calculation"
 - Introduced WeightedConstraint wrapper to calculate penalties via (violations * weight).
 - Updated Constraint implementations to return raw violation counts instead of hardcoded penalties.

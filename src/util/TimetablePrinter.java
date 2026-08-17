@@ -17,8 +17,20 @@ public class TimetablePrinter {
             int start = p.getSlot().getPeriod();
             int duration = p.getSession().getDuration();
 
+            String name = p.getSession().getSubject().getName();
+            SessionType type = p.getSession().getSessionType();
+            String label;
+
+            if (type == SessionType.LAB) {
+                label = name + " (LAB)";
+            } else if (type == SessionType.TUTORIAL) {
+                label = name + " (TUT)";
+            } else {
+                label = name;
+            }
+
             for (int i = 0; i < duration; i++) {
-                grid[day][start + i] = p.getSession().getSubject().getName();
+                grid[day][start + i] = label;
             }
         }
 

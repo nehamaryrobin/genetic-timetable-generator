@@ -1,17 +1,21 @@
 package model;
 
+import java.util.Objects;
+
 public class Subject {
 
     private final String code;
     private final String name;
-    private final int credits;
-    private final SubjectType type;
+    private final int theoryCredits;
+    private final int practicalCredits;
+    private final CourseType courseType;
 
-    public Subject(String code, String name, int credits, SubjectType type) {
+    public Subject(String code, String name, int theoryCredits, int practicalCredits, CourseType courseType) {
         this.code = code;
         this.name = name;
-        this.credits = credits;
-        this.type = type;
+        this.theoryCredits = theoryCredits;
+        this.practicalCredits = practicalCredits;
+        this.courseType = courseType;
     }
 
     public String getCode() {
@@ -22,16 +26,28 @@ public class Subject {
         return name;
     }
 
-    public int getCredits() {
-        return credits;
+    public int getTheoryCredits() {
+        return theoryCredits;
     }
 
-    public SubjectType getType() {
-        return type;
+    public int getPracticalCredits() {
+        return practicalCredits;
     }
 
-    public boolean isLab() {
-        return type == SubjectType.LAB;
+    public int getTotalCredits() {
+        return theoryCredits + practicalCredits;
+    }
+
+    public CourseType getCourseType() {
+        return courseType;
+    }
+
+    public boolean hasTheory() {
+        return theoryCredits > 0;
+    }
+
+    public boolean hasPractical() {
+        return practicalCredits > 0;
     }
 
     @Override
@@ -40,15 +56,14 @@ public class Subject {
             return true;
         if (other == null || getClass() != other.getClass())
             return false;
+
         Subject subject = (Subject) other;
-        return java.util.Objects.equals(code, subject.code);
-        // use Objects.equals(a, b) instead of code.equals(subject.code)
-        // to avoid NullPointerException
+        return Objects.equals(code, subject.code);
     }
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(code);
+        return Objects.hash(code);
     }
 
     @Override

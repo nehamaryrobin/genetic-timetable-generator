@@ -35,7 +35,7 @@ public class MaxDailyLectureConstraint implements Constraint {
             for (Placement placement : placements) {
                 Subject subject = placement.getSession().getSubject();
 
-                if (subject.isLab())
+                if (placement.getSession().getSessionType() == model.SessionType.LAB)
                     continue;
 
                 frequency.put(subject, frequency.getOrDefault(subject, 0) + 1);

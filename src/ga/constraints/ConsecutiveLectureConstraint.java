@@ -23,16 +23,8 @@ public class ConsecutiveLectureConstraint implements Constraint {
                     continue;
                 }
 
-                if (!current.getSession()
-                        .getSubject()
-                        .isLab() &&
-
-                        current.getSession()
-                                .getSubject()
-                                .equals(
-                                        next.getSession()
-                                                .getSubject())) {
-
+                if (current.getSession().getSessionType() != model.SessionType.LAB &&
+                        current.getSession().getSubject().equals(next.getSession().getSubject())) {
                     violations++;
                 }
             }

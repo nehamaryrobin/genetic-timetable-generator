@@ -29,7 +29,7 @@ public class RandomTimetableGenerator {
 
     private void separateSessions(List<Session> sessions, List<Session> lectures, List<Session> labs) {
         for (Session session : sessions) {
-            if (session.getSubject().isLab()) {
+            if (session.getSessionType() == SessionType.LAB) {
                 labs.add(session);
             } else {
                 lectures.add(session);

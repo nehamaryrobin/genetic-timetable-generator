@@ -20,17 +20,19 @@ public class SpreadConstraint implements Constraint {
 
         for (Subject subject : index.getBySubject().keySet()) {
 
-            if (subject.isLab())
+            if (!subject.hasTheory())
                 continue;
 
             List<Placement> placements = index.getBySubject(subject);
             Set<Day> days = new HashSet<>();
 
             for (Placement placement : placements) {
-                days.add(placement.getSlot().getDay());
+                if (placement.getSession().getSessionType() == model.SessionType.LECTURE) {
+                    days.add(placement.getSlot().getDay());
+                }
             }
 
-            int requiredDays = subject.getCredits();
+            int requiredDays = subject.getTheoryCredits();
             int actualDays = days.size();
 
             if (actualDays < requiredDays) {
