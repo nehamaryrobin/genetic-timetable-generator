@@ -8,24 +8,24 @@ import util.PlacementIndex;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class SpreadConstraint implements Constraint {
 
     @Override
     public int evaluate(EvaluationContext context) {
-        int penalty = 0;
+
+        int violations = 0;
         PlacementIndex index = context.getIndex();
 
-        for (Map.Entry<Subject, List<Placement>> entry : index.getBySubject().entrySet()) {
-            Subject subject = entry.getKey();
+        for (Subject subject : index.getBySubject().keySet()) {
 
             if (subject.isLab())
                 continue;
 
-            List<Placement> placements = entry.getValue();
+            List<Placement> placements = index.getBySubject(subject);
             Set<Day> days = new HashSet<>();
+
             for (Placement placement : placements) {
                 days.add(placement.getSlot().getDay());
             }
@@ -34,10 +34,9 @@ public class SpreadConstraint implements Constraint {
             int actualDays = days.size();
 
             if (actualDays < requiredDays) {
-                penalty += (requiredDays - actualDays) * 10;
+                violations += requiredDays - actualDays;
             }
         }
-
-        return penalty;
+        return violations;
     }
 }

@@ -2,6 +2,11 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 20 "REFACTOR : Decouple constraint violation detection from weight calculation"
+- Introduced WeightedConstraint wrapper to calculate penalties via (violations * weight).
+- Updated Constraint implementations to return raw violation counts instead of hardcoded penalties.
+- Configured constraint weights centrally in FitnessEvaluator.
+
 ## 19 "Add Gap Constraint"
 - Added GapConstraint class to penalize gaps between lectures of the same subject.
 
