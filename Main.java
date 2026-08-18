@@ -17,13 +17,19 @@ public class Main {
 
         try {
             // 1. Load Data
+            List<Faculty> facultyList = FacultyRepository.getFaculty();
             List<Subject> subjects = SubjectRepository.getSubjects();
             List<Session> sessions = SessionFactory.createSessions(subjects);
 
             int requiredSlots = TimetableCapacityValidator.calculateTotalRequiredSlots(sessions);
-            System.out.println("\nLoaded " + subjects.size() + " subjects -> " + sessions.size() + " scheduling sessions (" + requiredSlots + " period slots required).");
+            System.out.println("\nLoaded " + facultyList.size() + " faculty members & " + subjects.size() + " subjects -> " + sessions.size() + " scheduling sessions (" + requiredSlots + " period slots required).");
 
-            // Validate capacity early
+            System.out.println("\n--- SUBJECT TO FACULTY ASSIGNMENTS ---");
+            for (Subject subject : subjects) {
+                Faculty faculty = subject.getAssignedFaculty();
+                String facultyInfo = (faculty != null) ? faculty.getName() + " [" + faculty.getRank() + " | " + faculty.getAdministrativeTitle() + "]" : "Unassigned";
+                System.out.printf("  • %-7s : %-30s -> %s%n", subject.getCode(), subject.getName(), facultyInfo);
+            }
             TimetableCapacityValidator.validate(sessions);
 
             // 2. Configure Genetic Algorithm Engine (Dependency Injection)

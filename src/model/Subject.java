@@ -9,13 +9,27 @@ public class Subject {
     private final int theoryCredits;
     private final int practicalCredits;
     private final CourseType courseType;
+    private Faculty assignedFaculty;
 
     public Subject(String code, String name, int theoryCredits, int practicalCredits, CourseType courseType) {
+        this(code, name, theoryCredits, practicalCredits, courseType, null);
+    }
+
+    public Subject(String code, String name, int theoryCredits, int practicalCredits, CourseType courseType, Faculty assignedFaculty) {
         this.code = code;
         this.name = name;
         this.theoryCredits = theoryCredits;
         this.practicalCredits = practicalCredits;
         this.courseType = courseType;
+        this.assignedFaculty = assignedFaculty;
+    }
+
+    public Faculty getAssignedFaculty() {
+        return assignedFaculty;
+    }
+
+    public void setAssignedFaculty(Faculty assignedFaculty) {
+        this.assignedFaculty = assignedFaculty;
     }
 
     public String getCode() {

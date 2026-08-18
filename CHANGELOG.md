@@ -2,6 +2,12 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 24 "Created faulty Entity"
+-FacutlyRepository
+-Faculty Class
+-AdministrativeTitle enum
+-AcademicRank enum
+
 ## 23 "Add OverlapConstraint and TutorialBeforeLabConstraint"
 - Added OverlapConstraint class to penalize overlapping slots.
 - Added TutorialBeforeLabConstraint class to penalize tutorials before labs.

@@ -10,22 +10,23 @@ public class SubjectRepository {
         List<Subject> list = new ArrayList<>();
 
         // Pure Theory Courses
-        list.add(new Subject("CS201", "Aritifical Intelligence", 3, 0, CourseType.THEORY));
-        list.add(new Subject("CS204", "Distributed Computing", 2, 0, CourseType.THEORY));
-        list.add(new Subject("CS205", "Math", 3, 0, CourseType.THEORY));
-        list.add(new Subject("CS206", "Introduction to Cyber Security", 3, 0, CourseType.THEORY));
+        list.add(createSubject("CS201", "Aritifical Intelligence", 3, 0, CourseType.THEORY));
+        list.add(createSubject("CS204", "Distributed Computing", 2, 0, CourseType.THEORY));
+        list.add(createSubject("CS205", "Math", 3, 0, CourseType.THEORY));
+        list.add(createSubject("CS206", "Introduction to Cyber Security", 3, 0, CourseType.THEORY));
 
-        // Combined Theory & Practical Courses (4 Total Credits)
-        list.add(new Subject("CS202", "Software in IoT", 3, 1, CourseType.THEORY_PRACTICAL)); // 3 cred theory & 1 cred
+        // Combined Theory & Practical Courses
+        list.add(createSubject("CS202", "Software in IoT", 3, 1, CourseType.THEORY_PRACTICAL));
 
         // Pure Practical Courses
-        list.add(new Subject("CS207L", "Web Technology Lab", 0, 2, CourseType.PRACTICAL)); // 2 practical credits (3
-                                                                                           // labs + 1
-                                                                                           // tutorial)
-        list.add(new Subject("CS208L", "AI Lab", 0, 2, CourseType.PRACTICAL)); // 1 practical credit (2 labs + 1 //
-                                                                               // tutorial)
+        list.add(createSubject("CS207L", "Web Technology Lab", 0, 2, CourseType.PRACTICAL));
+        list.add(createSubject("CS208L", "AI Lab", 0, 2, CourseType.PRACTICAL));
 
         return list;
     }
 
+    private static Subject createSubject(String code, String name, int theory, int practical, CourseType type) {
+        Faculty faculty = FacultyRepository.findByCourseCode(code);
+        return new Subject(code, name, theory, practical, type, faculty);
+    }
 }
