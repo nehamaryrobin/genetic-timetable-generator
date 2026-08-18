@@ -89,8 +89,6 @@ public class RandomTimetableGenerator {
     }
 
     private void placeLectures(Chromosome chromosome, List<Session> lectures) {
-        Collections.shuffle(lectures);
-
         for (Session lecture : lectures) {
             boolean placed = false;
             int attempts = 0;

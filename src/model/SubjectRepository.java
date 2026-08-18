@@ -22,7 +22,7 @@ public class SubjectRepository {
         list.add(new Subject("CS207L", "Web Technology Lab", 0, 2, CourseType.PRACTICAL)); // 2 practical credits (3
                                                                                            // labs + 1
                                                                                            // tutorial)
-        list.add(new Subject("CS208L", "AI Lab", 0, 1, CourseType.PRACTICAL)); // 1 practical credit (2 labs + 1 //
+        list.add(new Subject("CS208L", "AI Lab", 0, 2, CourseType.PRACTICAL)); // 1 practical credit (2 labs + 1 //
                                                                                // tutorial)
 
         return list;

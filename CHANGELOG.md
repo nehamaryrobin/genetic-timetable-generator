@@ -2,6 +2,12 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 23 "Add OverlapConstraint and TutorialBeforeLabConstraint"
+- Added OverlapConstraint class to penalize overlapping slots.
+- Added TutorialBeforeLabConstraint class to penalize tutorials before labs.
+- Updated FitnessEvaluator to use WeightedConstraint wrapper.
+- 
+
 ## 22 "Edge Case : more credits than slots + theory_prac session alotment update"
 - added Exceptions incase there are more credits than slots , preventing infinite loops 
 - n + 1 lab + 1 tutorial logic
