@@ -1,7 +1,9 @@
 package generator;
 
 import config.SchedulingConfig;
+import exception.UnplaceableSessionException;
 import model.*;
+import util.TimetableCapacityValidator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,9 +14,12 @@ import ga.Chromosome;
 
 public class RandomTimetableGenerator {
 
+    private static final int MAX_PLACEMENT_ATTEMPTS = 1000;
     private final Random random = new Random();
 
     public Chromosome generate(List<Session> sessions) {
+        TimetableCapacityValidator.validate(sessions);
+
         Chromosome chromosome = new Chromosome();
 
         List<Session> lectures = new ArrayList<>();
@@ -40,7 +45,12 @@ public class RandomTimetableGenerator {
     private void placeLabs(Chromosome chromosome, List<Session> labs) {
         for (Session lab : labs) {
             boolean placed = false;
+            int attempts = 0;
             while (!placed) {
+                if (++attempts > MAX_PLACEMENT_ATTEMPTS) {
+                    throw new UnplaceableSessionException(lab, MAX_PLACEMENT_ATTEMPTS);
+                }
+
                 int day = random.nextInt(SchedulingConfig.WORKING_DAYS);
                 int period = random.nextInt(SchedulingConfig.PERIODS_PER_DAY - lab.getDuration() + 1);
 
@@ -83,7 +93,12 @@ public class RandomTimetableGenerator {
 
         for (Session lecture : lectures) {
             boolean placed = false;
+            int attempts = 0;
             while (!placed) {
+                if (++attempts > MAX_PLACEMENT_ATTEMPTS) {
+                    throw new UnplaceableSessionException(lecture, MAX_PLACEMENT_ATTEMPTS);
+                }
+
                 int day = random.nextInt(SchedulingConfig.WORKING_DAYS);
                 int period = random.nextInt(SchedulingConfig.PERIODS_PER_DAY);
 

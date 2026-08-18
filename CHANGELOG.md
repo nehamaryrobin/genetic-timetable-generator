@@ -2,6 +2,10 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 22 "Edge Case : more credits than slots + theory_prac session alotment update"
+- added Exceptions incase there are more credits than slots , preventing infinite loops 
+- n + 1 lab + 1 tutorial logic
+
 ## 21 "REFACTOR : split Subject type to SessionType and CourseType , Credit split"
 - split Subject type to SessionType and CourseType , Credit split
 - Modified TimetablePrinter to print SessionType suffix with subject names

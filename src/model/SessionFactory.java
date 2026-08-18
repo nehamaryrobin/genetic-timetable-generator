@@ -27,8 +27,8 @@ public class SessionFactory {
                 String tutSessionId = prefix + "-TUT-" + count++;
                 sessions.add(new Session(tutSessionId, subject, 1, SessionType.TUTORIAL));
 
-                // Lab Session (2 credits -> 3 consecutive slots, 1 credit -> 2 consecutive slots)
-                int labDuration = (subject.getPracticalCredits() >= 2) ? 3 : 2;
+                // Lab Session (n practical credits -> n + 1 consecutive lab slots)
+                int labDuration = subject.getPracticalCredits() + 1;
                 String labSessionId = prefix + "-LAB-" + count++;
                 sessions.add(new Session(labSessionId, subject, labDuration, SessionType.LAB));
             }
