@@ -2,6 +2,9 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 26 "FEAT: Add FacultyOverlapConstraint"
+- Added FacultyOverlapConstraint class to penalize faculty workload violations.
+
 ## 25 "FEAT: Add FacultyMaxWorkloadConstraint and Faculty Workload Summary printer"
 - Added FacultyMaxWorkloadConstraint class to penalize faculty workload violations.
 - Added Faculty Workload Summary printer to display faculty workload.

@@ -2,6 +2,7 @@ package ga;
 
 import ga.constraints.ConsecutiveLectureConstraint;
 import ga.constraints.FacultyMaxWorkloadConstraint;
+import ga.constraints.FacultyOverlapConstraint;
 import ga.constraints.GapConstraint;
 import ga.constraints.MaxDailyLectureConstraint;
 import ga.constraints.OverlapConstraint;
@@ -19,6 +20,7 @@ public class FitnessEvaluator {
     public FitnessEvaluator() {
 
         constraints.add(new WeightedConstraint(new OverlapConstraint(), 100));
+        constraints.add(new WeightedConstraint(new FacultyOverlapConstraint(), 100));
         constraints.add(new WeightedConstraint(new ConsecutiveLectureConstraint(), 10));
         constraints.add(new WeightedConstraint(new SpreadConstraint(), 10));
         constraints.add(new WeightedConstraint(new MaxDailyLectureConstraint(), 10));

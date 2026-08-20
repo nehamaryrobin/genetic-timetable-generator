@@ -18,12 +18,14 @@ public class PlacementIndex {
 
     private final Map<Subject, List<Placement>> bySubject;
     private final Map<Day, List<Placement>> byDay;
+    private final Map<Faculty, List<Placement>> byFaculty;
     private final Map<Faculty, Integer> facultyWeeklyWorkload;
     private final Map<Faculty, Map<Day, Integer>> facultyDailyWorkload;
 
     public PlacementIndex(Chromosome chromosome) {
         bySubject = new HashMap<>();
         byDay = new EnumMap<>(Day.class);
+        byFaculty = new HashMap<>();
         facultyWeeklyWorkload = new HashMap<>();
         facultyDailyWorkload = new HashMap<>();
         buildIndex(chromosome);
@@ -39,6 +41,8 @@ public class PlacementIndex {
 
             Faculty faculty = subject.getAssignedFaculty();
             if (faculty != null) {
+                byFaculty.computeIfAbsent(faculty, f -> new ArrayList<>()).add(placement);
+
                 int duration = placement.getSession().getDuration();
 
                 facultyWeeklyWorkload.put(faculty, facultyWeeklyWorkload.getOrDefault(faculty, 0) + duration);
@@ -58,12 +62,20 @@ public class PlacementIndex {
         return byDay.getOrDefault(day, new ArrayList<>());
     }
 
+    public List<Placement> getByFaculty(Faculty faculty) {
+        return byFaculty.getOrDefault(faculty, new ArrayList<>());
+    }
+
     public Map<Subject, List<Placement>> getBySubject() {
         return bySubject;
     }
 
     public Map<Day, List<Placement>> getByDay() {
         return byDay;
+    }
+
+    public Map<Faculty, List<Placement>> getByFaculty() {
+        return byFaculty;
     }
 
     public Map<Faculty, Integer> getFacultyWeeklyWorkload() {
