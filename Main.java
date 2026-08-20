@@ -19,10 +19,12 @@ public class Main {
             // 1. Load Data
             List<Faculty> facultyList = FacultyRepository.getFaculty();
             List<Subject> subjects = SubjectRepository.getSubjects();
+            List<Room> rooms = RoomRepository.getRooms();
+            List<StudentGroup> studentGroups = StudentGroupRepository.getStudentGroups();
             List<Session> sessions = SessionFactory.createSessions(subjects);
 
             int requiredSlots = TimetableCapacityValidator.calculateTotalRequiredSlots(sessions);
-            System.out.println("\nLoaded " + facultyList.size() + " faculty members & " + subjects.size() + " subjects -> " + sessions.size() + " scheduling sessions (" + requiredSlots + " period slots required).");
+            System.out.println("\nLoaded " + facultyList.size() + " faculty members, " + rooms.size() + " rooms, " + studentGroups.size() + " student groups, & " + subjects.size() + " subjects -> " + sessions.size() + " scheduling sessions (" + requiredSlots + " period slots required).");
 
             System.out.println("\n--- SUBJECT TO FACULTY ASSIGNMENTS ---");
             for (Subject subject : subjects) {

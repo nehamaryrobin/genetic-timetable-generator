@@ -2,6 +2,13 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 27 "FEAT: Add Room and StudentGroup entities and repositories"
+- Added Room entity and RoomType enum
+- Added StudentGroup entity with homeClassroom linking.
+- Added RoomRepository and StudentGroupRepository master data.
+
+------------- Iteration 3 Completed -----------------
+
 ## 26 "FEAT: Add FacultyOverlapConstraint"
 - Added FacultyOverlapConstraint class to penalize faculty workload violations.
 
