@@ -6,6 +6,7 @@ import ga.Chromosome;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class TimetablePrinter {
 
@@ -58,5 +59,28 @@ public class TimetablePrinter {
             }
             System.out.println();
         }
+
+        printFacultyWorkloadSummary(chromosome);
+    }
+
+    public static void printFacultyWorkloadSummary(Chromosome chromosome) {
+        PlacementIndex index = new PlacementIndex(chromosome);
+        Map<Faculty, Integer> workloads = index.getFacultyWeeklyWorkload();
+
+        System.out.println("=== FACULTY WORKLOAD SUMMARY ===");
+        System.out.printf("%-25s %-32s %-20s %-10s%n", "Faculty Member", "Rank & Title", "Weekly Load / Limit", "Status");
+        System.out.println("----------------------------------------------------------------------------------");
+
+        for (Map.Entry<Faculty, Integer> entry : workloads.entrySet()) {
+            Faculty f = entry.getKey();
+            int load = entry.getValue();
+            int max = f.getMaxWeeklyLoad();
+            String rankTitle = f.getRank() + " | " + f.getAdministrativeTitle();
+            String status = (load <= max) ? "OK" : "[EXCEEDED]";
+            String loadStr = String.format("%d / %d periods", load, max);
+
+            System.out.printf("%-25s %-32s %-20s %-10s%n", f.getName(), rankTitle, loadStr, status);
+        }
+        System.out.println();
     }
 }

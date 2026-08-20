@@ -1,6 +1,7 @@
 package ga;
 
 import ga.constraints.ConsecutiveLectureConstraint;
+import ga.constraints.FacultyMaxWorkloadConstraint;
 import ga.constraints.GapConstraint;
 import ga.constraints.MaxDailyLectureConstraint;
 import ga.constraints.OverlapConstraint;
@@ -23,6 +24,7 @@ public class FitnessEvaluator {
         constraints.add(new WeightedConstraint(new MaxDailyLectureConstraint(), 10));
         constraints.add(new WeightedConstraint(new GapConstraint(), 5));
         constraints.add(new WeightedConstraint(new TutorialBeforeLabConstraint(), 10));
+        constraints.add(new WeightedConstraint(new FacultyMaxWorkloadConstraint(), 10));
     }
 
     public int evaluate(Chromosome chromosome) {
