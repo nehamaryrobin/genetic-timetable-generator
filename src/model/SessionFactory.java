@@ -6,6 +6,12 @@ import java.util.List;
 public class SessionFactory {
 
     public static List<Session> createSessions(List<Subject> subjects) {
+        List<StudentGroup> groups = StudentGroupRepository.getStudentGroups();
+        StudentGroup defaultGroup = groups.isEmpty() ? null : groups.get(0);
+        return createSessions(subjects, defaultGroup);
+    }
+
+    public static List<Session> createSessions(List<Subject> subjects, StudentGroup studentGroup) {
 
         List<Session> sessions = new ArrayList<>();
 
@@ -17,7 +23,7 @@ public class SessionFactory {
             if (subject.hasTheory()) {
                 for (int i = 0; i < subject.getTheoryCredits(); i++) {
                     String sessionId = prefix + "-LEC-" + count++;
-                    sessions.add(new Session(sessionId, subject, 1, SessionType.LECTURE));
+                    sessions.add(new Session(sessionId, subject, 1, SessionType.LECTURE, studentGroup));
                 }
             }
 
@@ -25,12 +31,12 @@ public class SessionFactory {
             if (subject.hasPractical()) {
                 // Tutorial Hour (1 slot)
                 String tutSessionId = prefix + "-TUT-" + count++;
-                sessions.add(new Session(tutSessionId, subject, 1, SessionType.TUTORIAL));
+                sessions.add(new Session(tutSessionId, subject, 1, SessionType.TUTORIAL, studentGroup));
 
                 // Lab Session (n practical credits -> n + 1 consecutive lab slots)
                 int labDuration = subject.getPracticalCredits() + 1;
                 String labSessionId = prefix + "-LAB-" + count++;
-                sessions.add(new Session(labSessionId, subject, labDuration, SessionType.LAB));
+                sessions.add(new Session(labSessionId, subject, labDuration, SessionType.LAB, studentGroup));
             }
         }
 

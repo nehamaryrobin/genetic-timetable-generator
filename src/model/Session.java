@@ -6,13 +6,26 @@ public class Session {
     private final Subject subject;
     private final int duration; // Number of consecutive slots required
     private final SessionType sessionType;
+    private StudentGroup studentGroup;
 
     public Session(String id, Subject subject, int duration, SessionType sessionType) {
+        this(id, subject, duration, sessionType, null);
+    }
 
+    public Session(String id, Subject subject, int duration, SessionType sessionType, StudentGroup studentGroup) {
         this.id = id;
         this.subject = subject;
         this.duration = duration;
         this.sessionType = sessionType;
+        this.studentGroup = studentGroup;
+    }
+
+    public StudentGroup getStudentGroup() {
+        return studentGroup;
+    }
+
+    public void setStudentGroup(StudentGroup studentGroup) {
+        this.studentGroup = studentGroup;
     }
 
     public String getId() {

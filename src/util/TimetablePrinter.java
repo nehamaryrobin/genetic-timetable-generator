@@ -37,6 +37,10 @@ public class TimetablePrinter {
                 label = name;
             }
 
+            if (p.getRoom() != null) {
+                label += " [" + p.getRoom().getName() + "]";
+            }
+
             for (int i = 0; i < duration; i++) {
                 if (start + i < SchedulingConfig.PERIODS_PER_DAY) {
                     grid[day][start + i].add(label);

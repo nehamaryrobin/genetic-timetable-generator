@@ -14,6 +14,7 @@ public class Elitism {
         return eliteCount;
     }
 
+    // O(N log N)
     public void preserve(Population current, Population next) {
         current.getChromosomes()
                 .stream()

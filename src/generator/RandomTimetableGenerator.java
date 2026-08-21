@@ -55,9 +55,11 @@ public class RandomTimetableGenerator {
                 int period = random.nextInt(SchedulingConfig.PERIODS_PER_DAY - lab.getDuration() + 1);
 
                 if (canPlaceLab(chromosome, Day.values()[day], period, lab.getDuration())) {
+                    Room room = determineRoom(lab);
                     Placement placement = new Placement(
                             lab,
-                            new TimeSlot(Day.values()[day], period));
+                            new TimeSlot(Day.values()[day], period),
+                            room);
                     chromosome.addPlacements(placement);
                     placed = true;
                 }
@@ -101,13 +103,36 @@ public class RandomTimetableGenerator {
                 int period = random.nextInt(SchedulingConfig.PERIODS_PER_DAY);
 
                 if (!occupied(chromosome, Day.values()[day], period)) {
+                    Room room = determineRoom(lecture);
                     Placement placement = new Placement(
                             lecture,
-                            new TimeSlot(Day.values()[day], period));
+                            new TimeSlot(Day.values()[day], period),
+                            room);
                     chromosome.addPlacements(placement);
                     placed = true;
                 }
             }
         }
+    }
+
+    private Room determineRoom(Session session) {
+        if (session.getSessionType() == SessionType.LAB) {
+            List<Room> labs = RoomRepository.findByType(RoomType.LAB_ROOM);
+            if (!labs.isEmpty()) {
+                for (Room labRoom : labs) {
+                    if (session.getSubject().getCode().contains("207L") && labRoom.getId().equals("LAB1")) {
+                        return labRoom;
+                    }
+                    if (session.getSubject().getCode().contains("208L") && labRoom.getId().equals("LAB2")) {
+                        return labRoom;
+                    }
+                }
+                return labs.get(0);
+            }
+        }
+        if (session.getStudentGroup() != null && session.getStudentGroup().getHomeClassroom() != null) {
+            return session.getStudentGroup().getHomeClassroom();
+        }
+        return RoomRepository.getRooms().isEmpty() ? null : RoomRepository.getRooms().get(0);
     }
 }

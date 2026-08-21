@@ -2,6 +2,12 @@
 
 All notable changes to the Genetic Timetable Generator project will be documented in this file.
 
+## 28 "Attached StudentGroup, Room to Placements/Chromosome"
+- Attached StudentGroup to Session & SessionFactory.
+- Attached Room to Placement.
+- Implemented Room-Aware Placement in RandomTimetableGenerator (theory -> home classroom Room 301, labs -> specialized lab rooms).
+- Updated TimetablePrinter to render assigned rooms for every period slot.
+
 ## 27 "FEAT: Add Room and StudentGroup entities and repositories"
 - Added Room entity and RoomType enum
 - Added StudentGroup entity with homeClassroom linking.
